@@ -1,0 +1,60 @@
+﻿@model Company
+@{
+    ViewData["Title"] = "Edit or Create Company";
+}
+
+<form method="post" asp-action="Upsert"> @* you dont need explicit to add action in there *@
+    <div class="row">
+        <div class="col-10">
+             <div class="border p-3 mt-4 rounded row">
+        <div class="row pb-3">
+            <h3 class="text-primary pb-2">@(Model.Id == 0 ? "Create" : "Update") Product</h3>
+            <hr />
+        </div>
+        @*<div asp-validation-summary="All"></div>*@
+        <div class="mb-3">
+            <label asp-for="Name" class="mb-1">Name</label>
+            <input asp-for="Name" class="form-control rounded"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+         <div class="mb-3 col-6">
+            <label asp-for="StreetAddress" class="mb-1">Street Address</label>
+            <input asp-for="StreetAddress" class="form-control rounded"/>
+            <span asp-validation-for="StreetAddress" class="text-danger"></span>
+        </div>
+         <div class="mb-3 col-6">
+            <label asp-for="City" class="mb-1">City</label>
+            <input asp-for="City" class="form-control rounded"/>
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+         <div class="mb-3 col-6">
+            <label asp-for="State" class="mb-1">State</label>
+            <input asp-for="State" class="form-control rounded"/>
+            <span asp-validation-for="State" class="text-danger"></span>
+        </div>
+         <div class="mb-3 col-6">
+            <label asp-for="PostalCode" class="mb-1">PostalCode</label>
+            <input asp-for="PostalCode" class="form-control rounded"/>
+            <span asp-validation-for="PostalCode" class="text-danger"></span>
+        </div>
+         <div class="mb-3 col-6">
+            <label asp-for="PhoneNumber" class="mb-1">PhoneNumber</label>
+            <input asp-for="PhoneNumber" class="form-control rounded"/>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <input asp-for="Id" type="hidden"/>
+
+        <div class="d-flex h-100 w-100">
+        <button type="submit" class="btn btn-success p-2 rounded col-2 h-25 me-2">@(Model.Id == 0 ? "Create" : "Update")</button>
+        <a asp-controller="Company" asp-action="Index" class="btn btn-secondary p-2 h-25 rounded col-2">Back</a>
+        </div>
+    </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
