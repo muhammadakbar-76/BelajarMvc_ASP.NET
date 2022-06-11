@@ -32,5 +32,7 @@ namespace BelajarMvcWeb.Models
         public string State { get; set; }
         public string PostalCode { get; set; }
         public string UserName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string StreetAddress { get; set; }
     }
 }

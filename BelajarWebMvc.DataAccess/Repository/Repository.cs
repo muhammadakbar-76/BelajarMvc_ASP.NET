@@ -25,7 +25,7 @@ namespace BelajarMvcWeb.DataAccess.Repository
             dbSet.Add(entity);
         }
 
-        public IEnumerable<T> GetAll(string? includeProperties, Expression<Func<T, bool>>? filter=null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter=null, string? includeProperties=null)
         {
             IQueryable<T> query = dbSet;
             if(filter is not null)

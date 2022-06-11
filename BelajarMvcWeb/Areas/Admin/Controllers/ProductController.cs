@@ -1,12 +1,15 @@
 ﻿using BelajarMvcWeb.DataAccess.Repository.IRepository;
 using BelajarMvcWeb.Models;
 using BelajarMvcWeb.Models.ViewModels;
+using BelajarMvcWeb.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BelajarMvcWeb.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = $"{SD.Role_Admin},{SD.Role_Employee}")]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

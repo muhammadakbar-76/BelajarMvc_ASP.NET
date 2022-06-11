@@ -34,5 +34,13 @@ namespace BelajarMvcWeb.DataAccess.Repository
                 }
             }
         }
+
+        public void UpdatePayment(int id, string sessionId, string paymentIntentId)
+        {
+            var orderHeaders = _db.OrderHeaders.FirstOrDefault(o => o.Id == id);
+            orderHeaders.PaymentDate = DateTime.Now;
+            orderHeaders.SessionId = sessionId;
+            orderHeaders.PaymentIntentId = paymentIntentId;
+        }
     }
 }

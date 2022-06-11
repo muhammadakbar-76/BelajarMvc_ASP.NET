@@ -11,5 +11,6 @@ namespace BelajarMvcWeb.DataAccess.Repository.IRepository
     {
         void Update(OrderHeaders orderHeaders);
         void UpdateStatus(int id, string orderStatus, string? paymentStatus=null);
+        void UpdatePayment(int id, string sessionId, string payemntIntentId);
     }
 }

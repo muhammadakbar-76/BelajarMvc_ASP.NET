@@ -17,7 +17,7 @@ namespace BelajarMvcWeb.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -168,6 +168,10 @@ namespace BelajarMvcWeb.DataAccess.Migrations
                     b.Property<string>("PaymentStatus")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PostalCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -179,6 +183,10 @@ namespace BelajarMvcWeb.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

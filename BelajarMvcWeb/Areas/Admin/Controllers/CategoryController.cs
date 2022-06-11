@@ -1,10 +1,13 @@
 ﻿using BelajarMvcWeb.DataAccess.Repository.IRepository;
 using BelajarMvcWeb.Models;
+using BelajarMvcWeb.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BelajarMvcWeb.Controllers
 {
     [Area("Admin")] //this is unneccesary, but just for sure i like to add it
+    [Authorize(Roles = $"{SD.Role_Admin},{SD.Role_Employee}")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

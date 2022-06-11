@@ -10,6 +10,8 @@ namespace BelajarMvcWeb.Models.ViewModels
     {
         public IEnumerable<ShoppingCart> ListCart { get; set; }
 
+        public OrderHeaders OrderHeader { get; set; }
+
         public double CartTotal { get; set; }
     }
 }

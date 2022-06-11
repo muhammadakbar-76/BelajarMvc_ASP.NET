@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["title"] = "All Orders";
+    var status = Context.Request.Query["status"];
+}
+
+<div class="d-flex justify-content-between my-3">
+    <div class="p-2">
+        <h2 class="text-primary">Orders</h2>
+    </div>
+    <div class="p-2">
+        <ul class="list-group list-group-horizontal-sm">
+            <a style="text-decoration: none;" asp-action="Index" asp-route-status="inprocess">
+            <li class="list-group-item@(status == "inprocess" ? " active" : "")">In Process</li>
+            </a>
+            <a style="text-decoration: none;" asp-action="Index" asp-route-status="pending">
+            <li class="list-group-item@(status == "pending" ? " active" : "")">Payment Pending</li>
+            </a>
+            <a style="text-decoration: none;" asp-action="Index" asp-route-status="completed">
+            <li class="list-group-item@(status == "completed" ? " active" : "")">Completed</li>
+            </a>
+            <a style="text-decoration: none;" asp-action="Index" asp-route-status="approved">
+            <li class="list-group-item@(status == "completed" ? " active" : "")">Approved</li>
+            </a>
+            <a style="text-decoration: none;" asp-action="Index" asp-route-status="all">
+            <li class="list-group-item@(status == "all" || status.Count == 0 ? " active" : "")">All</li>
+            </a>
+        </ul>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped" id="tblData">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>phone number</th>
+            <th>Email</th>
+            <th>Order Status</th>
+            <th>Order Total</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @section Scripts {
+    <script src="~/js/order.js"></script>
+    }
+    @*section scripts will include all of the script inside _Layout*@
+</table>

@@ -1,6 +1,7 @@
 ﻿using BelajarMvcWeb.DataAccess.Repository.IRepository;
 using BelajarMvcWeb.Models;
 using BelajarMvcWeb.Models.ViewModels;
+using BelajarMvcWeb.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -29,7 +30,7 @@ namespace BelajarMvcWeb.Controllers
 
         public IActionResult Details(int productId)
         {
-            var product = _unitOfWork.Product.GetFirstOrDefault(x => x.Id == productId,includeProperties: "Category,CoverType");
+            var product = _unitOfWork.Product.GetFirstOrDefault(x => x.Id == productId, includeProperties: "Category,CoverType");
             if (product == null) return NotFound();
             ShoppingCart shopcart = new()
             {
@@ -50,17 +51,19 @@ namespace BelajarMvcWeb.Controllers
             shoppingCart.ApplicationUserId = claim.Value;
 
             ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.GetFirstOrDefault(
-                u=>u.ApplicationUserId == claim.Value && u.ProductId == shoppingCart.ProductId);
-            if(cartFromDb == null)
+                u => u.ApplicationUserId == claim.Value && u.ProductId == shoppingCart.ProductId);
+            if (cartFromDb == null)
             {
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
+                _unitOfWork.Save();
+                HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(s => s.ApplicationUserId == claim.Value).ToList().Count);
             }
             else
             {
-                cartFromDb.Count += shoppingCart.Count;
+                cartFromDb.Count = shoppingCart.Count;
                 _unitOfWork.ShoppingCart.Update(cartFromDb);
+                _unitOfWork.Save();
             }
-            _unitOfWork.Save();
 
             TempData["success"] = "Book Order Success";
             return RedirectToAction(nameof(Index));
